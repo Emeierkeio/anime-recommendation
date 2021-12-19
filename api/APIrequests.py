@@ -50,7 +50,7 @@ def check_response_status_code(response):
 
 # Write the list of all the anime important informations to csv file
 def write_anime_list_to_csv(anime_list):
-    with open('anime_informations.csv', 'a') as csv_file:
+    with open('../data/api/anime_informations.csv', 'a') as csv_file:
         for anime in anime_list:
             formatted_anime = format_anime(anime)
             id, en_title, _, episodes_count, episode_duration, _, status, format, year = get_information(formatted_anime)
@@ -61,10 +61,10 @@ def write_anime_list_to_csv(anime_list):
 
 # Write anime descriptions to csv file
 def write_anime_descriptions_to_csv(anime_list):
-    with open('anime_descriptions.csv', 'a') as csv_file:
+    with open('../data/api/anime_descriptions.csv', 'a') as csv_file:
         for anime in anime_list:
             formatted_anime = format_anime(anime)
-            id, _, description, _, _, _, _, _ = get_information(formatted_anime)
+            id, _, description, _, _, _, _, _, _ = get_information(formatted_anime)
             csv_file.write(id + ',' + description  + '\n')
     csv_file.close()
     print('Anime descriptions written to csv file')
@@ -72,10 +72,10 @@ def write_anime_descriptions_to_csv(anime_list):
 
 # Write anime genres to csv file
 def write_anime_genres_to_csv(anime_list):
-    with open('anime_genres.csv', 'a') as csv_file:
+    with open('../data/api/anime_genres.csv', 'a') as csv_file:
         for anime in anime_list:
             formatted_anime = format_anime(anime)
-            id, _, _, _, _, genres, _, _ = get_information(formatted_anime)
+            id, _, _, _, _, genres, _, _, _ = get_information(formatted_anime)
             for genre in genres:
                 csv_file.write(id + ',' + genre + '\n')
     csv_file.close()
