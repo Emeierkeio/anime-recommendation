@@ -1,10 +1,18 @@
+# -----------------------------------------------------------
+# This file contains the functions to request all the needed informations 
+#      from the aniapi.com API and write them to csv files.
+#
+# 2021, Mirko Tritella, Aurora Cerabolini, Corinna Strada
+# email m.tritella@campus.unimib.it
+# -----------------------------------------------------------
+
 import requests
 from requests.api import get
 
 token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg1MiIsIm5iZiI6MTYzOTg0NDA4NCwiZXhwIjoxNjQyNDM2MDg0LCJpYXQiOjE2Mzk4NDQwODR9.EGOLZz-qo91DKVc4gA0RxC0l0MmD44Vl3MhVcwobb0M"
 
-# Dictionary for format destination
-format_destination = {
+# This dictionary maps format destination from integer value to text
+formatDestination = {
     0 : "tv",
     1 : "tv short",
     2 : "movie",
@@ -14,8 +22,8 @@ format_destination = {
     6 : "music",
 }
 
-# Dictionary for release status
-release_status = {
+# This dictionary maps release status from integer value to text
+releaseStatus = {
     0 : "finished",
     1 : "releasing",
     2 : "not yet released",
@@ -23,100 +31,105 @@ release_status = {
 }
 
 
-# Request the list of all the anime in the database
-def get_anime_list(page_number):
-    url = "https://api.aniapi.com/v1/anime/?page={}".format(page_number)
-    response = api_request(url, token)
+# Request the list of all the anime contained in the page pageNumber
+def requestJson(pageNumber):
+    url = "https://api.aniapi.com/v1/anime/?page={}".format(pageNumber)
+    response = apiRequest(url, token)
     return response.json()
 
-# API request
-def api_request(url, token):
+# Create API request with the needed parameters
+def apiRequest(url, token):
     headers = {'Authorization': 'Bearer ' + token,
                'Content-Type': 'application/json',
                'Accept': 'application/json'}
     return requests.get(url, headers=headers)
 
 # Check response status code
-def check_response_status_code(response):
+def checkResponseStatusCode(response):
     if response['status_code'] == 200:
         return True
     elif(response['status_code'] == 429):
         print("Rate Limit raggiunto, aspetta un po', la pagina raggiunta è: " + str(response.url))
         return False
     else:
-        print("Errore: " + str(response.status_code) + " " + str(response.url))
+        print("Errore: " + str(response['status_code']))
         return False
 
 
 # Write the list of all the anime important informations to csv file
-def write_anime_list_to_csv(anime_list):
-    with open('../data/api/anime_informations.csv', 'a') as csv_file:
-        for anime in anime_list:
-            formatted_anime = format_anime(anime)
-            id, en_title, _, episodes_count, episode_duration, _, status, format, year = get_information(formatted_anime)
-            csv_file.write(id + ',' + en_title + ',' + year + ',' + episodes_count + ',' + episode_duration + ',' + format_destination[format] + ',' + release_status[status] + '\n')
-    csv_file.close()
+def animeInformationstoCSV(animeList):
+    with open('../data/api/anime_informations.csv', 'a') as csvFile:
+        for anime in animeList:
+            fixedAnime = fixDictionary(anime)
+            id, enTitle, _, episodesCount, episodeDuration, _, status, format, year = getInformations(fixedAnime)
+            csvFile.write(id + ',' + enTitle + ',' + year + ',' + episodesCount + ',' + episodeDuration + ',' + formatDestination[format] + ',' + releaseStatus[status] + '\n')
+    csvFile.close()
     print('Anime list written to csv file')
     return
 
 # Write anime descriptions to csv file
-def write_anime_descriptions_to_csv(anime_list):
-    with open('../data/api/anime_descriptions.csv', 'a') as csv_file:
-        for anime in anime_list:
-            formatted_anime = format_anime(anime)
-            id, _, description, _, _, _, _, _, _ = get_information(formatted_anime)
-            csv_file.write(id + ',' + description  + '\n')
-    csv_file.close()
+def animeDescriptiontoCSV(animeList):
+    with open('../data/api/anime_descriptions.csv', 'a') as csvFile:
+        for anime in animeList:
+            fixedAnime = fixDictionary(anime)
+            id, _, description, _, _, _, _, _, _ = getInformations(fixedAnime)
+            formattedDescription = formatDescription(description)
+            csvFile.write(id + '|' + formattedDescription  + '\n')
+    csvFile.close()
     print('Anime descriptions written to csv file')
     return
 
 # Write anime genres to csv file
-def write_anime_genres_to_csv(anime_list):
-    with open('../data/api/anime_genres.csv', 'a') as csv_file:
-        for anime in anime_list:
-            formatted_anime = format_anime(anime)
-            id, _, _, _, _, genres, _, _, _ = get_information(formatted_anime)
+def animeGenrestoCSV(animeList):
+    with open('../data/api/anime_genres.csv', 'a') as csvFile:
+        for anime in animeList:
+            fixedAnime = fixDictionary(anime)
+            id, _, _, _, _, genres, _, _, _ = getInformations(fixedAnime)
             for genre in genres:
-                csv_file.write(id + ',' + genre + '\n')
-    csv_file.close()
+                csvFile.write(id + ',' + genre + '\n')
+    csvFile.close()
     print('Anime genres written to csv file')
     return
 
-# Format the anime to be able to get the information
-def format_anime(anime):
+# Format the dictionary to be able to get nested informations
+def fixDictionary(anime):
     anime['en_title'] = anime['titles']['en']
     anime['en_description'] = anime['descriptions']['en']
     return anime
 
+# Format the description of the anime to delete tabs, pipes and new lines
+def formatDescription(description):
+    return description.replace('\n', '').replace('\r', '').replace('\t', '').replace('|', '')
+
      
-# Get the list of anime from the json response
-def get_anime_list_from_json(response):
-    anime_list = response['data']['documents']
-    return anime_list
+# Get the list of anime from the JSON response
+def getAnimeListFromJson(response):
+    animeList = response['data']['documents']
+    return animeList
 
 # Get the information of the anime in order to handle KeyError exception
-def get_information(anime):
+def getInformations(anime):
     id = anime.get('id', '')
-    en_title = anime.get('en_title', '')
-    episodes_count = anime.get('episodes_count', '')
-    episode_duration = anime.get('episode_duration', '')
+    enTitle = anime.get('en_title', '')
+    episodesCount = anime.get('episodes_count', '')
+    episodeDuration = anime.get('episode_duration', '')
     description = anime.get('en_description', '')
     genres = anime.get('genres', [])
-    release_status = anime.get('status', '')
-    format_destination = anime.get('format', '')
+    releaseStatus = anime.get('status', '')
+    formatDestination = anime.get('format', '')
     year = anime.get('season_year', '')
 
-    return str(id), str(en_title), str(description), str(episodes_count), str(episode_duration), genres, release_status, format_destination, str(year)
+    return str(id), str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year)
 
 if __name__ == "__main__":
-    for page_number in range(1, 145):
-        anime_list = get_anime_list(page_number)
-        if check_response_status_code(anime_list):
-            jsonResponse = get_anime_list_from_json(anime_list)
-            write_anime_list_to_csv(jsonResponse)
-            write_anime_descriptions_to_csv(jsonResponse)
-            write_anime_genres_to_csv(jsonResponse)
+    for pageNumber in range(1, 145):
+        jsonResponse = requestJson(pageNumber)
+        if checkResponseStatusCode(jsonResponse):
+            animeList = getAnimeListFromJson(jsonResponse)
+            animeInformationstoCSV(animeList)
+            animeDescriptiontoCSV(animeList)
+            animeGenrestoCSV(animeList)
         else:
             break
-        print("Page number {} finished".format(page_number))
+        print("Page number {} finished".format(pageNumber))
 
