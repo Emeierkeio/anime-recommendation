@@ -1,6 +1,6 @@
 # -----------------------------------------------------------
 # This file contains the functions to request all the needed informations 
-#      from the aniapi.com API and write them to csv files.
+#      from the https://aniapi.com/ API and write them to csv files.
 #
 # 2021, Mirko Tritella, Aurora Cerabolini, Corinna Strada
 # email m.tritella@campus.unimib.it
@@ -22,6 +22,7 @@ formatDestination = {
     6 : "music",
 }
 
+
 # This dictionary maps release status from integer value to text
 releaseStatus = {
     0 : "finished",
@@ -37,12 +38,14 @@ def requestJson(pageNumber):
     response = apiRequest(url, token)
     return response.json()
 
+
 # Create API request with the needed parameters
 def apiRequest(url, token):
     headers = {'Authorization': 'Bearer ' + token,
                'Content-Type': 'application/json',
                'Accept': 'application/json'}
     return requests.get(url, headers=headers)
+
 
 # Check response status code
 def checkResponseStatusCode(response):
@@ -67,6 +70,7 @@ def animeInformationstoCSV(animeList):
     print('Anime list written to csv file')
     return
 
+
 # Write anime descriptions to csv file
 def animeDescriptiontoCSV(animeList):
     with open('../data/api/anime_descriptions.csv', 'a') as csvFile:
@@ -78,6 +82,7 @@ def animeDescriptiontoCSV(animeList):
     csvFile.close()
     print('Anime descriptions written to csv file')
     return
+
 
 # Write anime genres to csv file
 def animeGenrestoCSV(animeList):
@@ -91,11 +96,13 @@ def animeGenrestoCSV(animeList):
     print('Anime genres written to csv file')
     return
 
+
 # Format the dictionary to be able to get nested informations
 def fixDictionary(anime):
     anime['en_title'] = anime['titles']['en']
     anime['en_description'] = anime['descriptions']['en']
     return anime
+
 
 # Format the description of the anime to delete tabs, pipes and new lines
 def formatDescription(description):
@@ -106,6 +113,7 @@ def formatDescription(description):
 def getAnimeListFromJson(response):
     animeList = response['data']['documents']
     return animeList
+
 
 # Get the information of the anime in order to handle KeyError exception
 def getInformations(anime):
@@ -120,6 +128,8 @@ def getInformations(anime):
     year = anime.get('season_year', '')
 
     return str(id), str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year)
+
+
 
 if __name__ == "__main__":
     for pageNumber in range(1, 145):
