@@ -47,7 +47,7 @@ def apiRequest(url, token):
     return requests.get(url, headers=headers)
 
 
-# Check response status code
+# Check response status code to handle errors
 def checkResponseStatusCode(response):
     if response['status_code'] == 200:
         return True
@@ -64,7 +64,7 @@ def animeInformationstoCSV(animeList):
     with open('../data/api/anime_informations.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            enTitle, _, episodesCount, episodeDuration, _, status, format, year, mal_id = getInformations(fixedAnime)
+            mal_id, enTitle, _, episodesCount, episodeDuration, _, status, format, year = getInformations(fixedAnime)
             csvFile.write(mal_id + ',' + enTitle + ',' + year + ',' + episodesCount + ',' + episodeDuration + ',' + formatDestination[format] + ',' + releaseStatus[status] + '\n')
     csvFile.close()
     print('Anime list written to csv file')
@@ -76,7 +76,7 @@ def animeDescriptiontoCSV(animeList):
     with open('../data/api/anime_descriptions.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            _, description, _, _, _, _, _, _, mal_id = getInformations(fixedAnime)
+            mal_id, _, description, _, _, _, _, _, _ = getInformations(fixedAnime)
             formattedDescription = formatDescription(description)
             csvFile.write(mal_id + '|' + formattedDescription  + '\n')
     csvFile.close()
@@ -89,7 +89,7 @@ def animeGenrestoCSV(animeList):
     with open('../data/api/anime_genres.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            _, _, _, _, genres, _, _, _, mal_id = getInformations(fixedAnime)
+            mal_id, _, _, _, _, genres, _, _, _ = getInformations(fixedAnime)
             for genre in genres:
                 csvFile.write(mal_id + ',' + genre + '\n')
     csvFile.close()
@@ -127,7 +127,7 @@ def getInformations(anime):
     year = anime.get('season_year', '')
     mal_id = anime.get('mal_id', '')
 
-    return str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year), str(mal_id)
+    return str(mal_id), str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year)
 
 
 
