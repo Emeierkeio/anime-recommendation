@@ -64,8 +64,8 @@ def animeInformationstoCSV(animeList):
     with open('../data/api/anime_informations.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            id, enTitle, _, episodesCount, episodeDuration, _, status, format, year = getInformations(fixedAnime)
-            csvFile.write(id + ',' + enTitle + ',' + year + ',' + episodesCount + ',' + episodeDuration + ',' + formatDestination[format] + ',' + releaseStatus[status] + '\n')
+            enTitle, _, episodesCount, episodeDuration, _, status, format, year, mal_id = getInformations(fixedAnime)
+            csvFile.write(mal_id + ',' + enTitle + ',' + year + ',' + episodesCount + ',' + episodeDuration + ',' + formatDestination[format] + ',' + releaseStatus[status] + '\n')
     csvFile.close()
     print('Anime list written to csv file')
     return
@@ -76,9 +76,9 @@ def animeDescriptiontoCSV(animeList):
     with open('../data/api/anime_descriptions.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            id, _, description, _, _, _, _, _, _ = getInformations(fixedAnime)
+            _, description, _, _, _, _, _, _, mal_id = getInformations(fixedAnime)
             formattedDescription = formatDescription(description)
-            csvFile.write(id + '|' + formattedDescription  + '\n')
+            csvFile.write(mal_id + '|' + formattedDescription  + '\n')
     csvFile.close()
     print('Anime descriptions written to csv file')
     return
@@ -89,9 +89,9 @@ def animeGenrestoCSV(animeList):
     with open('../data/api/anime_genres.csv', 'a') as csvFile:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
-            id, _, _, _, _, genres, _, _, _ = getInformations(fixedAnime)
+            _, _, _, _, genres, _, _, _, mal_id = getInformations(fixedAnime)
             for genre in genres:
-                csvFile.write(id + ',' + genre + '\n')
+                csvFile.write(mal_id + ',' + genre + '\n')
     csvFile.close()
     print('Anime genres written to csv file')
     return
@@ -117,7 +117,6 @@ def getAnimeListFromJson(response):
 
 # Get the information of the anime in order to handle KeyError exception
 def getInformations(anime):
-    id = anime.get('id', '')
     enTitle = anime.get('en_title', '')
     episodesCount = anime.get('episodes_count', '')
     episodeDuration = anime.get('episode_duration', '')
@@ -126,8 +125,9 @@ def getInformations(anime):
     releaseStatus = anime.get('status', '')
     formatDestination = anime.get('format', '')
     year = anime.get('season_year', '')
+    mal_id = anime.get('mal_id', '')
 
-    return str(id), str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year)
+    return str(enTitle), str(description), str(episodesCount), str(episodeDuration), genres, releaseStatus, formatDestination, str(year), str(mal_id)
 
 
 
