@@ -17,13 +17,12 @@ def getPage(malId):
 
 
 # Get the list of MAL ID of the anime from csv file
-def getMalIds():
-    ids = []
+def getId():
     with open("../data/api/animeid.csv", "r") as file:
-        for line in file:
-            animeTitle = line.strip().split(",")[0]
-            ids.append(animeTitle)
-    return ids
+        # Get the first row of the csv file
+        firstRow = file.readline()
+        id = firstRow.split(",")[0]
+    return id
 
 # Create a csv file with the informations of the anime
 def informationsCsv(id, animeStudios, producer):
@@ -115,12 +114,19 @@ def reviewsCsv(id, votes, reviews):
             file.write(str(id) + '|' + str(votes[i]) + '|' + str(reviews[i]) + "\n")
     file.close()
 
+# Remove first row of csv file
+def removeFirstRow():
+    with open("../data/api/animeid.csv", "r") as f:
+        lines = f.readlines()
+    with open("../data/api/animeid.csv", "w") as f:
+        f.writelines(lines[1:])
+    f.close()
 
 if __name__ == "__main__":
     # Get the page from every element in animeList
-    ids = getMalIds()
     iteration = 0
-    for id in ids[1:]:
+    while True:
+        id = getId()
         statusCode, url, content = getPage(id)
         if statusCode == 200:
             informationsCsv(id, getStudios(content), getProducer(content))
@@ -128,7 +134,11 @@ if __name__ == "__main__":
             votes, reviews = getRatingAndReviews(content)
             reviewsCsv(id, votes, reviews)
             print("Written correctly anime number {}; id: ".format(iteration) + str(id) + "; url: " + url)
+            removeFirstRow()
             iteration += 1
+        elif statusCode == 404:
+            print("Assenza di id, passo al prossimo anime")
+            removeFirstRow()
         elif statusCode == 403:
             print("Error in page: " + str(id) + " wait or change your ip address")
             break
