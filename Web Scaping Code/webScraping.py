@@ -57,16 +57,6 @@ def getProducer(response):
     
     return producer.replace(",", "")
 
-# In case of error, save the anime informations in a csv file
-def checkErrors(statusCode, url, id):
-    if statusCode != 200:
-        with open("../data/scraping/errors.csv", "a") as file:
-            file.write(str(id) + "," + url + "," + str(statusCode) + "\n")
-        file.close()
-        return False
-    else:
-        return True
-
 
 # Get recommendations from the page of the anime broken
 def getRecommendations(id, response):
@@ -132,14 +122,15 @@ if __name__ == "__main__":
     iteration = 0
     for id in ids[1:]:
         statusCode, url, content = getPage(id)
-        if checkErrors(statusCode, url, id):
+        if statusCode == 200:
             informationsCsv(id, getStudios(content), getProducer(content))
             recommendationsCsv(id, getRecommendations(id, content))
             votes, reviews = getRatingAndReviews(content)
             reviewsCsv(id, votes, reviews)
             print("Written correctly anime number {}; id: ".format(iteration) + str(id) + "; url: " + url)
             iteration += 1
-        else:
-            print("Error in page: " + str(id))
+        elif statusCode == 403:
+            print("Error in page: " + str(id) + " wait or change your ip address")
+            break
     
 
