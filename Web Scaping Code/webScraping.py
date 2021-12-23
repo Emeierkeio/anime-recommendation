@@ -16,7 +16,7 @@ def getPage(malId):
     return page.status_code, page.url, BeautifulSoup(page.content, "html.parser")
 
 
-# Get the list of MAL ID of the anime from csv file
+# Get the id of the first row of csv file
 def getId():
     with open("../data/api/animeid.csv", "r") as file:
         # Get the first row of the csv file
@@ -57,7 +57,7 @@ def getProducer(response):
     return producer.replace(",", "")
 
 
-# Get recommendations from the page of the anime broken
+# Get recommendations from the page of the anime
 def getRecommendations(id, response):
     try:
         # Get the list of div with class btn-anime
@@ -108,13 +108,14 @@ def recommendationsCsv(id, recommendations):
             file.write(str(id) + ',' + str(recommendation) + "\n")
     file.close()
 
+# Write the reviews in a csv file
 def reviewsCsv(id, votes, reviews):
     with open("../data/scraping/reviews.csv", "a") as file:
         for i in range(len(votes)):
             file.write(str(id) + '|' + str(votes[i]) + '|' + str(reviews[i]) + "\n")
     file.close()
 
-# Remove first row of csv file
+# Remove first row of csv file from which the id is taken
 def removeFirstRow():
     with open("../data/api/animeid.csv", "r") as f:
         lines = f.readlines()
