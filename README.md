@@ -21,9 +21,9 @@ make html
 ```
 
 ## Team
-Mirko Tritella (887196)
-Aurora Cerabolini (839327)
-Corinna Strada (839193)
+* Mirko Tritella (887196)
+* Aurora Cerabolini (839327)
+* Corinna Strada (839193)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
