@@ -6,32 +6,68 @@
 # email m.tritella@campus.unimib.it
 # -----------------------------------------------------------
 
+from typing import Tuple
 import requests
 from bs4 import BeautifulSoup
 
-# Get the page that you need to scrape starting from the id of the anime
-def getPage(malId):
+def getPage(malId: int) -> Tuple:
+    """
+    Get the anime that you need to scrape starting from the id of the anime
+
+    :param malId: Id of the anime.
+    :type malId: int
+    :return: Tuple containing status code, page url and page content.
+    :rtype: Tuple
+
+    """
     URL = "https://myanimelist.net/anime/" + str(malId)
     page = requests.get(URL)
     return page.status_code, page.url, BeautifulSoup(page.content, "html.parser")
 
 
-# Get the id of the first row of csv file
-def getId():
+def getId() -> int:
+    """
+    Get the id of the anime from the csv file named animeid.csv previously created copying the informations from api/anime_informations.csv
+
+    :return: The first anime id in the csv file.
+    :rtype: int
+
+    """
     with open("../data/api/animeid.csv", "r") as file:
         # Get the first row of the csv file
         firstRow = file.readline()
         id = firstRow.split(",")[0]
     return id
 
-# Create a csv file with the informations of the anime
-def informationsCsv(id, animeStudios, producer):
+
+def informationsCsv(id:int, animeStudios:str, producer:str) -> None:
+    """
+    Write the informations about the anime in a csv file named anime_informations.csv
+
+    :param id: Id of the anime.
+    :type id: int
+    :param animeStudios: Studios of the anime.
+    :type animeStudios: str
+    :param producer: Producer of the anime.
+    :type producer: str
+    :return: None.
+
+    """
     with open("../data/scraping/anime_informations.csv", "a") as file:
         file.write(str(id) + "," + animeStudios + "," + producer + "\n")
     file.close()
 
-# Scrape the informations about animeStudios and Producer of the content of response
-def getStudios(response):
+
+def getStudios(response: str) -> str:
+    """
+    Scrape the informations about animeStudios from the response
+
+    :param response: Response of the page of the anime.
+    :type response: str
+    :return: Studios of the anime.
+    :rtype: str
+
+    """
     try:
         studio = response.find_all("span", class_="dark_text")
         for i in studio:
@@ -45,8 +81,17 @@ def getStudios(response):
         print("Error in studios for id: " + str(id))
     return animeStudios
 
-# Scrape the first element in the list of staff in content of response
-def getProducer(response):
+
+def getProducer(response: str) -> str:
+    """
+    Scrape the informations about anime producer from the response
+
+    :param response: Response of the page of the anime.
+    :type response: str
+    :return: Produer of the anime.
+    :rtype: str
+
+    """
     try:
         staffDiv = response.find_all("div", class_="detail-characters-list clearfix")
         producer = staffDiv[1].find_all("img")[0].get("alt")
@@ -58,7 +103,18 @@ def getProducer(response):
 
 
 # Get recommendations from the page of the anime
-def getRecommendations(id, response):
+def getRecommendations(id: int, response: str) -> list:
+    """
+    Scrape the anime recommendations' ids from the response
+
+    :param id: Id of the anime.
+    :type id: int
+    :param response: Response of the page of the anime.
+    :type response: str
+    :return: List of recommendations' ids.
+    :rtype: list
+
+    """
     try:
         # Get the list of div with class btn-anime
         recommendationList = response.find_all("li", class_="btn-anime")
@@ -79,8 +135,17 @@ def getRecommendations(id, response):
         print("Error in recommendations for id: " + str(id))
     return recommendationsIDs
 
-# Get the reviews and votes of the anime
-def getRatingAndReviews(response):
+
+def getRatingAndReviews(response: str) -> Tuple:
+    """
+    Get the reviews and votes of the anime.
+    
+    :param response: Response of the page of the anime.
+    :type response: str
+    :return: List of votes and list of reviews.
+    :rtype: Tuple
+
+    """
     try:
         # Get the votes
         rating = response.find_all("div", class_="mb8")
@@ -101,22 +166,50 @@ def getRatingAndReviews(response):
         print("Error in votes and reviews for id: " + str(id))
     return votes, reviewsText
 
-# Write the recommendations in a csv file
-def recommendationsCsv(id, recommendations):
+
+def recommendationsCsv(id: int, recommendations: list) -> None:
+    """
+    Write the recommendations in a csv file named anime_recommendations.csv
+
+    :param id: Id of the anime.
+    :type id: int
+    :param recommendations: List of recommendations' ids.
+    :type recommendations: list
+    :return: None.
+
+    """
     with open("../data/scraping/recommendations.csv", "a") as file:
         for recommendation in recommendations:
             file.write(str(id) + ',' + str(recommendation) + "\n")
     file.close()
 
-# Write the reviews in a csv file
-def reviewsCsv(id, votes, reviews):
+
+def reviewsCsv(id: int, votes: list, reviews: list) -> None:
+    """
+    Write the reviews in a csv file named anime_reviews.csv
+
+    :param id: Id of the anime.
+    :type id: int
+    :param votes: List of votes.
+    :type votes: list
+    :param reviews: List of reviews' texts.
+    :type reviews: list.
+    :return: None.
+    
+    """
     with open("../data/scraping/reviews.csv", "a") as file:
         for i in range(len(votes)):
             file.write(str(id) + '|' + str(votes[i]) + '|' + str(reviews[i]) + "\n")
     file.close()
 
-# Remove first row of csv file from which the id is taken
-def removeFirstRow():
+
+def removeFirstRow() -> None:
+    """
+    Remove first row of csv file from which the id is taken.
+
+    :return: None.
+    
+    """
     with open("../data/api/animeid.csv", "r") as f:
         lines = f.readlines()
     with open("../data/api/animeid.csv", "w") as f:
