@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="dataCleaning" href="generated/dataCleaning.html" />
 
     <link rel="shortcut icon" href="_static/icon.ico"/><meta name="generator" content="sphinx-4.3.2, furo 2021.11.23"/>
-        <title>Data Files</title>
+        <title>Data Directory</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=7f0192ddeb2adecfbaa87ffbcf67d16358b30bc1" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -168,7 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/dataCleaning.html">dataCleaning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Files</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Directory</a></li>
 </ul>
 
 </div>
@@ -189,15 +189,337 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="data-files">
-<h1>Data Files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h1>
-<p>Prova a scrivere qualcosa</p>
+          <section id="data-directory">
+<h1>Data Directory<a class="headerlink" href="#data-directory" title="Permalink to this headline">¶</a></h1>
+<section id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>Using API, we obtained several important pieces of information of all the souls in the AniApi database (more than 14000), and, for convenience, we divided them into several tables:</p>
+<ul class="simple">
+<li><p>The first file contains the most important informations of every anime (id, title, year, episodes count and duration, …)</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id1">
+<caption><span class="caption-text">anime_informations.csv [rows: 14.356]</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>en_title</p></th>
+<th class="head"><p>season_year</p></th>
+<th class="head"><p>episodes_count</p></th>
+<th class="head"><p>episode_duration</p></th>
+<th class="head"><p>format_destination</p></th>
+<th class="head"><p>release_status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>Gintama: THE FINAL</p></td>
+<td><p>2021</p></td>
+<td><p>1</p></td>
+<td><p>104</p></td>
+<td><p>movie</p></td>
+<td><p>finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>42938</p></td>
+<td><p>Fruits Basket: The Final</p></td>
+<td><p>2021</p></td>
+<td><p>13</p></td>
+<td><p>24</p></td>
+<td><p>tv</p></td>
+<td><p>finished</p></td>
+</tr>
+<tr class="row-even"><td><p>28977</p></td>
+<td><p>Gintama°</p></td>
+<td><p>2015</p></td>
+<td><p>51</p></td>
+<td><p>24</p></td>
+<td><p>tv</p></td>
+<td><p>finished</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>Dr. STONE: Ryuusui</p></td>
+<td><p>2022</p></td>
+<td><p>1</p></td>
+<td></td>
+<td><p>special</p></td>
+<td><p>not yet released</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>The second file contains the genres of every anime, each id is repeated for every genre that features the anime.</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id2">
+<caption><span class="caption-text">anime_genres.csv [rows: 84.419]</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>genre</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>Action</p></td>
+</tr>
+<tr class="row-odd"><td><p>39486</p></td>
+<td><p>Comedy</p></td>
+</tr>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>Drama</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>Post-Apocalyptic</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>The third file contains the description of every anime.</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id3">
+<caption><span class="caption-text">anime_descriptions.csv [rows: 14.356]</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>Gintama The Final is the 3rd and final film adaptation of the remainder of the Silver Soul Arc</p></td>
+</tr>
+<tr class="row-odd"><td><p>42938</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>28977</p></td>
+<td><p>Gintoki, Shinpachi, and Kagura return as the fun-loving but broke members of the Yorozuya team!…</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>A television special that is set after the second season and will center around Ryuusui Nanami.</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="scraping">
+<h2>Scraping<a class="headerlink" href="#scraping" title="Permalink to this headline">¶</a></h2>
+<p>In order to increase the amount of data at our disposal, we have chosen, through the scraping tool, to obtain information from one of the most famous sites dedicated to anime, namely myanimelist.net, we divided them into several tables:</p>
+<ul class="simple">
+<li><p>The first file contains the informations about studios and producer:</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id4">
+<caption><span class="caption-text">animeStudiosandDirector.csv [rows: 13.077]</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>studios</p></th>
+<th class="head"><p>director</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>Bandai Namco Pictures</p></td>
+<td><p>Fujita Youichi</p></td>
+</tr>
+<tr class="row-odd"><td><p>42938</p></td>
+<td><p>TMS Entertainment</p></td>
+<td><p>Ibata Yoshihide</p></td>
+</tr>
+<tr class="row-even"><td><p>28977</p></td>
+<td><p>Bandai Namco Pictures</p></td>
+<td><p>Fujita Youichi</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>TMS Entertainment</p></td>
+<td><p>Boichi</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>The second file contains the informations about reviews and votes:</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id5">
+<caption><span class="caption-text">reviews.csv [rows: 21.370]</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>overall</p></th>
+<th class="head"><p>text</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>10</p></td>
+<td><p>Overall 10   Story 10   Animation 10   Sound 10   Character 10   Enjoyment 10  Its finally over. The story that I…</p></td>
+</tr>
+<tr class="row-odd"><td><p>39486</p></td>
+<td><p>4</p></td>
+<td><p>Overall 4   Story 0   Animation 0   Sound 0   Character 0   Enjoyment 0  To be honest, i’m disappointed.   Ah, Gintama,…</p></td>
+</tr>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>10</p></td>
+<td><p>Overall 10   Story 9   Animation 8   Sound 10   Character 10   Enjoyment 10  This movie has everything that makes a classic Gintama: parody, toile…</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>8</p></td>
+<td><p>Overall 8   Story 8   Animation 9   Sound 10   Character 8   Enjoyment 9  This review will contain NO SPOILERS.   First of al…</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>The third file contains the informations about recommendations, it contains the couple (id anime, id recommendated anime)</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id6">
+<caption><span class="caption-text">recommendations.csv [rows: 149.422]</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>recommendation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>40211</p></td>
+</tr>
+<tr class="row-odd"><td><p>39486</p></td>
+<td><p>3002</p></td>
+</tr>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>759</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>50612</p></td>
+<td><p>16662</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>The fourth file contains the cleaned informations about reviews, different valuations are divided (Overall, Story, Animation, Sound, Charachter, Enjoyment)</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default" id="id7">
+<caption><span class="caption-text">cleanedReviews.csv [rows: 21.366]</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>overall</p></th>
+<th class="head"><p>story</p></th>
+<th class="head"><p>animation</p></th>
+<th class="head"><p>sound</p></th>
+<th class="head"><p>charachter</p></th>
+<th class="head"><p>enjoyment</p></th>
+<th class="head"><p>text</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>Its finally over. The story that I learned so many things from, the story which had a deep impression…</p></td>
+</tr>
+<tr class="row-odd"><td><p>39486</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>To be honest, i’m disappointed. Ah, Gintama, you used to be great a long time ago, what happened?…</p></td>
+</tr>
+<tr class="row-even"><td><p>39486</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>This movie has everything that makes a classic Gintama: parody, toilet humor, drama, sword action, tears and…</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>29727</p></td>
+<td><p>8</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>This review will contain NO SPOILERS. First of all, I was totally surprised when I saw the number of people who…</p></td>
+</tr>
+</tbody>
+</table></div>
+</section>
 </section>
 
         </article>
@@ -231,8 +553,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Data Directory</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#scraping">Scraping</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -168,7 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generated/dataCleaning.html">dataCleaning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">Data Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data Directory</a></li>
 </ul>
 
 </div>
@@ -247,9 +247,9 @@
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="webScraping.getProducer">
-<span class="sig-prename descclassname"><span class="pre">webScraping.</span></span><span class="sig-name descname"><span class="pre">getProducer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#webScraping.getProducer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Scrape the informations about anime producer from the response</p>
+<dt class="sig sig-object py" id="webScraping.getDirector">
+<span class="sig-prename descclassname"><span class="pre">webScraping.</span></span><span class="sig-name descname"><span class="pre">getDirector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#webScraping.getDirector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scrape the informations about anime director from the response</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>response</strong> (<em>str</em>) – Response of the page of the anime.</p>
@@ -314,15 +314,15 @@
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="webScraping.informationsCsv">
-<span class="sig-prename descclassname"><span class="pre">webScraping.</span></span><span class="sig-name descname"><span class="pre">informationsCsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">animeStudios</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">producer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#webScraping.informationsCsv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write the informations about the anime in a csv file named anime_informations.csv</p>
+<dt class="sig sig-object py" id="webScraping.studiosandDirectorCsv">
+<span class="sig-prename descclassname"><span class="pre">webScraping.</span></span><span class="sig-name descname"><span class="pre">studiosandDirectorCsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">animeStudios</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">director</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#webScraping.studiosandDirectorCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the informations about the anime in a csv file named animeStudiosandDirector.csv</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<em>int</em>) – Id of the anime.</p></li>
 <li><p><strong>animeStudios</strong> (<em>str</em>) – Studios of the anime.</p></li>
-<li><p><strong>producer</strong> (<em>str</em>) – Producer of the anime.</p></li>
+<li><p><strong>director</strong> (<em>str</em>) – Director of the anime.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

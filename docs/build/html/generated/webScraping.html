@@ -168,7 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dataCleaning.html">dataCleaning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../data.html">Data Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">Data Directory</a></li>
 </ul>
 
 </div>
@@ -204,14 +204,14 @@
 <col style="width: 90%"/>
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.getId" title="webScraping.getId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getId</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.getDirector" title="webScraping.getDirector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDirector</span></code></a>(response)</p></td>
+<td><p>Scrape the informations about anime director from the response</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.getId" title="webScraping.getId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getId</span></code></a>()</p></td>
 <td><p>Get the id of the anime from the csv file named animeid.csv previously created copying the informations from api/anime_informations.csv</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.getPage" title="webScraping.getPage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getPage</span></code></a>(malId)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.getPage" title="webScraping.getPage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getPage</span></code></a>(malId)</p></td>
 <td><p>Get the anime that you need to scrape starting from the id of the anime</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.getProducer" title="webScraping.getProducer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getProducer</span></code></a>(response)</p></td>
-<td><p>Scrape the informations about anime producer from the response</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.getRatingAndReviews" title="webScraping.getRatingAndReviews"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getRatingAndReviews</span></code></a>(response)</p></td>
 <td><p>Get the reviews and votes of the anime.</p></td>
@@ -222,17 +222,17 @@
 <tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.getStudios" title="webScraping.getStudios"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getStudios</span></code></a>(response)</p></td>
 <td><p>Scrape the informations about animeStudios from the response</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.informationsCsv" title="webScraping.informationsCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">informationsCsv</span></code></a>(id, animeStudios, producer)</p></td>
-<td><p>Write the informations about the anime in a csv file named anime_informations.csv</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.recommendationsCsv" title="webScraping.recommendationsCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recommendationsCsv</span></code></a>(id, recommendations)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.recommendationsCsv" title="webScraping.recommendationsCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recommendationsCsv</span></code></a>(id, recommendations)</p></td>
 <td><p>Write the recommendations in a csv file named anime_recommendations.csv</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.removeFirstRow" title="webScraping.removeFirstRow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeFirstRow</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.removeFirstRow" title="webScraping.removeFirstRow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeFirstRow</span></code></a>()</p></td>
 <td><p>Remove first row of csv file from which the id is taken.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.reviewsCsv" title="webScraping.reviewsCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reviewsCsv</span></code></a>(id, votes, reviews)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../scraping.html#webScraping.reviewsCsv" title="webScraping.reviewsCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reviewsCsv</span></code></a>(id, votes, reviews)</p></td>
 <td><p>Write the reviews in a csv file named anime_reviews.csv</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../scraping.html#webScraping.studiosandDirectorCsv" title="webScraping.studiosandDirectorCsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">studiosandDirectorCsv</span></code></a>(id, animeStudios, director)</p></td>
+<td><p>Write the informations about the anime in a csv file named animeStudiosandDirector.csv</p></td>
 </tr>
 </tbody>
 </table></div>

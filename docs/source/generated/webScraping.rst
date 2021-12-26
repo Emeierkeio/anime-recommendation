@@ -13,16 +13,16 @@
 
    .. autosummary::
    
+      getDirector
       getId
       getPage
-      getProducer
       getRatingAndReviews
       getRecommendations
       getStudios
-      informationsCsv
       recommendationsCsv
       removeFirstRow
       reviewsCsv
+      studiosandDirectorCsv
    
    
 

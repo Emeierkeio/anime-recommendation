@@ -17,11 +17,11 @@ Functions
 
 .. autofunction:: webScraping.getId
 .. autofunction:: webScraping.getPage
-.. autofunction:: webScraping.getProducer
+.. autofunction:: webScraping.getDirector
 .. autofunction:: webScraping.getRatingAndReviews
 .. autofunction:: webScraping.getRecommendations
 .. autofunction:: webScraping.getStudios
-.. autofunction:: webScraping.informationsCsv
+.. autofunction:: webScraping.studiosandDirectorCsv
 .. autofunction:: webScraping.recommendationsCsv
 .. autofunction:: webScraping.removeFirstRow
 .. autofunction:: webScraping.reviewsCsv

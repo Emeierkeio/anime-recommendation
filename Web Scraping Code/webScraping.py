@@ -40,21 +40,21 @@ def getId() -> int:
     return id
 
 
-def informationsCsv(id:int, animeStudios:str, producer:str) -> None:
+def studiosandDirectorCsv(id:int, animeStudios:str, director:str) -> None:
     """
-    Write the informations about the anime in a csv file named anime_informations.csv
+    Write the informations about the anime in a csv file named animeStudiosandDirector.csv
 
     :param id: Id of the anime.
     :type id: int
     :param animeStudios: Studios of the anime.
     :type animeStudios: str
-    :param producer: Producer of the anime.
-    :type producer: str
+    :param director: Director of the anime.
+    :type director: str
     :return: None.
 
     """
-    with open("../data/scraping/anime_informations.csv", "a") as file:
-        file.write(str(id) + "," + animeStudios + "," + producer + "\n")
+    with open("../data/scraping/animeStudiosandDirector.csv", "a") as file:
+        file.write(str(id) + "," + animeStudios + "," + director + "\n")
     file.close()
 
 
@@ -82,9 +82,9 @@ def getStudios(response: str) -> str:
     return animeStudios
 
 
-def getProducer(response: str) -> str:
+def getDirector(response: str) -> str:
     """
-    Scrape the informations about anime producer from the response
+    Scrape the informations about anime director from the response
 
     :param response: Response of the page of the anime.
     :type response: str
@@ -94,12 +94,12 @@ def getProducer(response: str) -> str:
     """
     try:
         staffDiv = response.find_all("div", class_="detail-characters-list clearfix")
-        producer = staffDiv[1].find_all("img")[0].get("alt")
+        director = staffDiv[1].find_all("img")[0].get("alt")
     except:
-        producer = ""
-        print("Error in producer for id: " + str(id))
+        director = ""
+        print("Error in director for id: " + str(id))
     
-    return producer.replace(",", "")
+    return director.replace(",", "")
 
 
 # Get recommendations from the page of the anime
@@ -223,7 +223,7 @@ if __name__ == "__main__":
         id = getId()
         statusCode, url, content = getPage(id)
         if statusCode == 200:
-            informationsCsv(id, getStudios(content), getProducer(content))
+            studiosandDirectorCsv(id, getStudios(content), getDirector(content))
             recommendationsCsv(id, getRecommendations(id, content))
             votes, reviews = getRatingAndReviews(content)
             reviewsCsv(id, votes, reviews)
