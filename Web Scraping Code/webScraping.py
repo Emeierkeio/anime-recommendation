@@ -1,10 +1,9 @@
-# -----------------------------------------------------------
-# This file contains the functions to scrape all the needed informations 
-#      from https://www.anime-planet.com/ and write them to csv files.
-#
-# 2021, Mirko Tritella, Aurora Cerabolini, Corinna Strada
-# email m.tritella@campus.unimib.it
-# -----------------------------------------------------------
+'''
+This file contains the functions to scrape all the needed informations from https://www.anime-planet.com/ and write them to csv files.
+
+In the main function, at every loop iteration, an id is taken from the first line of the csv named animeid.csv (copied from api/anime_informations.csv) and then removed after the informations are scraped from the page of the anime if the status code is 200.
+Else, if the status code is 403, the rate limit is reached and the program stops waiting for the next request.
+'''
 
 from typing import Tuple
 import requests
@@ -217,8 +216,6 @@ def removeFirstRow() -> None:
     f.close()
 
 if __name__ == "__main__":
-    # Get the page from every element in animeList
-    iteration = 0
     while True:
         id = getId()
         statusCode, url, content = getPage(id)
@@ -227,9 +224,8 @@ if __name__ == "__main__":
             recommendationsCsv(id, getRecommendations(id, content))
             votes, reviews = getRatingAndReviews(content)
             reviewsCsv(id, votes, reviews)
-            print("Written correctly anime number {}; id: ".format(iteration) + str(id) + "; url: " + url)
+            print("Anime written correctly; id: " + str(id) + "; url: " + url)
             removeFirstRow()
-            iteration += 1
         elif statusCode == 404:
             print("Assenza di id, passo al prossimo anime")
             removeFirstRow()

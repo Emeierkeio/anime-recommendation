@@ -1,9 +1,9 @@
-# -----------------------------------------------------------
-# This file contains the functions to clean data scraped
-#
-# 2021, Mirko Tritella, Aurora Cerabolini, Corinna Strada
-# email m.tritella@campus.unimib.it
-# -----------------------------------------------------------
+'''
+This file contains the functions to clean data scraped.
+
+In the main function, it is called the function cleanReviews() that rewrite the informations in reviews.csv to another file named cleanedReviews.csv where there are a column for each valutation (Overall, Story, Animation, Sound, Charachter, Enjoyment).
+The function digitsInLine() is used to get the number of digits in the review text to divide, exactly, the valuations from the text.
+'''
 import re
 
 def digitsInLine(charList:list) -> int:

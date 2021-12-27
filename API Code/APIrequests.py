@@ -1,10 +1,9 @@
-# -----------------------------------------------------------
-# This file contains the functions to request all the needed informations 
-#      from the https://aniapi.com/ API and write them to csv files.
-#
-# 2021, Mirko Tritella, Aurora Cerabolini, Corinna Strada
-# email m.tritella@campus.unimib.it
-# -----------------------------------------------------------
+'''
+This file contains the functions to request all the needed informations from the https://aniapi.com/ API and write them to csv files.
+
+In the main function, the program request all the 144 pages in API pagination and, for each page, it request the list of anime.
+If the request is successful, it get the anime list and write, in the different csv files, the informations of each anime.
+'''
 
 import requests
 from requests.api import get
