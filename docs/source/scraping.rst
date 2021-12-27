@@ -1,7 +1,7 @@
 Web Scraping Code
 ================================================
 
-Prova a scrivere qualcosa
+This section contains the documentation required to scrape informations from https://myanimelist.net/.
 
 Overview
 ---------
