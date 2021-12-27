@@ -9,7 +9,7 @@
 import requests
 from requests.api import get
 
-token = "aniapi_token_here" #: AniAPI token
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg1MiIsIm5iZiI6MTYzOTg0NDA4NCwiZXhwIjoxNjQyNDM2MDg0LCJpYXQiOjE2Mzk4NDQwODR9.EGOLZz-qo91DKVc4gA0RxC0l0MmD44Vl3MhVcwobb0M" #: AniAPI token
 
 formatDestination = {
     0 : "tv",
@@ -98,7 +98,7 @@ def animeInformationstoCSV(animeList:list) -> None:
         for anime in animeList:
             fixedAnime = fixDictionary(anime)
             mal_id, enTitle, _, episodesCount, episodeDuration, _, status, format, year = getInformations(fixedAnime)
-            csvFile.write(mal_id + ',' + enTitle + ',' + year + ',' + episodesCount + ',' + episodeDuration + ',' + formatDestination[format] + ',' + releaseStatus[status] + '\n')
+            csvFile.write(mal_id + '|' + enTitle + '|' + year + '|' + episodesCount + '|' + episodeDuration + '|' + formatDestination[format] + '|' + releaseStatus[status] + '\n')
     csvFile.close()
     print('Anime list written to csv file')
     return
@@ -198,7 +198,7 @@ def getInformations(anime:dict) -> list:
     :rtype: dict
 
     """
-    enTitle = anime.get('en_title', '')
+    enTitle = anime.get('en_title', '').replace("|", "")
     episodesCount = anime.get('episodes_count', '')
     episodeDuration = anime.get('episode_duration', '')
     description = anime.get('en_description', '')
@@ -218,8 +218,8 @@ if __name__ == "__main__":
         if checkResponseStatusCode(jsonResponse):
             animeList = getAnimeListFromJson(jsonResponse)
             animeInformationstoCSV(animeList)
-            animeDescriptiontoCSV(animeList)
-            animeGenrestoCSV(animeList)
+            #animeDescriptiontoCSV(animeList)
+            #animeGenrestoCSV(animeList)
         else:
             break
         print("Page number {} finished".format(pageNumber))
