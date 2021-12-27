@@ -9,7 +9,7 @@
 import requests
 from requests.api import get
 
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg1MiIsIm5iZiI6MTYzOTg0NDA4NCwiZXhwIjoxNjQyNDM2MDg0LCJpYXQiOjE2Mzk4NDQwODR9.EGOLZz-qo91DKVc4gA0RxC0l0MmD44Vl3MhVcwobb0M" #: AniAPI token
+token = "aniapi_token" #: AniAPI token
 
 formatDestination = {
     0 : "tv",
