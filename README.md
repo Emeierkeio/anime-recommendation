@@ -15,8 +15,7 @@ We will use two different sources:
 The project documentation can be generated via the [Sphinx](https://www.sphinx-doc.org/en/master/ "Sphinx") tool by running:
 
 ```bash
-python3 -m pip install sphinx
-python3 -m pip install furo
+pip install -r requirements.txt
 
 cd docs/
 make html
