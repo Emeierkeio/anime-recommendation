@@ -26,10 +26,6 @@ Contents
    data
 
 
-.. note::
-
-   This project is under active development.
-
 Team
 --------
 Mirko Tritella - 887196

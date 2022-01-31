@@ -1,5 +1,5 @@
 '''
-This file contains the functions to scrape all the needed informations from https://www.anime-planet.com/ and write them to csv files.
+This file contains the functions to scrape all the needed informations from https://myanimelist.net/ and write them to csv files.
 
 In the main function, at every loop iteration, an id is taken from the first line of the csv named animeid.csv (copied from api/anime_informations.csv) and then removed after the informations are scraped from the page of the anime if the status code is 200.
 Else, if the status code is 403, the rate limit is reached and the program stops waiting for the next request.
